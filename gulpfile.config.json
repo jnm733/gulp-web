@@ -1,12 +1,16 @@
 {
   "css": {
     "src"  : ["public/css/*.css"],
-    "dest"   : "public/output/css",
+    "dest"   : "public/build/css",
     "concat" : "styles"
   },
   "js": {
     "src"    : ["public/js/*.js", "!public/js/deposit.js"],
-    "dest"   : "public/output/js",
+    "dest"   : "public/build/js",
     "concat" : "scripts"
+  },
+  "img": {
+    "src"    : ["public/img/*"],
+    "dest"   : "public/build/img"
   }
 }

@@ -1,12 +1,22 @@
+//General
 const { parallel, src, dest } = require('gulp');
-const uglify = require('gulp-uglify');
-const cleanCSS = require('gulp-clean-css');
+const changed = require('gulp-changed');
 const concat = require('gulp-concat');
 const rename = require('gulp-rename');
-const prefix = require('gulp-autoprefixer');
 const gulpif = require('gulp-if');
 const rev = require('gulp-rev');
 
+//CSS
+const cleanCSS = require('gulp-clean-css');
+const prefix = require('gulp-autoprefixer');
+
+//JS
+const uglify = require('gulp-uglify');
+
+//IMG
+const imagemin = require('gulp-imagemin');
+
+//Config
 var config = require('./gulpfile.config.json');
 
 // Gulp task to minify and union CSS files
@@ -32,7 +42,7 @@ function minifyCSS() {
         .pipe(rev.manifest('build-manifest.json', {
             merge: true
         }))
-        .pipe(dest(config.css.dest+'/build'));
+        .pipe(dest(config.css.dest+'/manifest'));
 }
 
 // Gulp task to minify and union JavaScript files
@@ -56,7 +66,17 @@ function minifyJS() {
         .pipe(rev.manifest('build-manifest.json', {
             merge: true
         }))
-        .pipe(dest(config.js.dest+'/build'));
+        .pipe(dest(config.js.dest+'/manifest'));
 }
 
-exports.build = parallel(minifyCSS, minifyJS);
+// Gulp task to minify images files
+function minifyIMG() {
+    return src(config.img.src)
+        .pipe(changed(config.img.dest))
+        .pipe(imagemin())
+        .pipe(dest(config.img.dest));
+}
+
+
+
+exports.build = parallel(minifyCSS, minifyJS, minifyIMG);
