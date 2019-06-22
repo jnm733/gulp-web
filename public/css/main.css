@@ -1,0 +1,69 @@
+/* Datepicker */
+#ui-datepicker-div {
+    z-index: 9999 !important;
+}
+/* Margins & Paddings */
+.mt0 {
+    margin-top: 0;
+}
+.mtb5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+/* Navbar */
+.navbar-inverse .navbar-brand {
+    background-size: 120px;
+}
+.navbar > .container-fluid .navbar-brand {
+    margin-left: 0;
+}
+/* Panels */
+.dashboard .panel-title {
+    width: 100%;
+}
+/* Tables */
+.dataTable tfoot {
+    display: table-header-group;
+}
+.dataTables_filter {
+    display: none;
+}
+.top-menu .table-filter {
+    color: #0090D9;
+    text-decoration: none;
+}
+.top-menu .table-filter.active {
+    font-weight: bold;
+}
+.form-duplicate-item {
+    display: inline;
+}
+.dataTables_length .btn-group.bootstrap-select {
+    width: auto;
+}
+.dataTable tfoot th input, .dataTable tfoot th select {
+    width: 100%;
+}
+.dataTables_wrapper .dataTables_processing {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 450px;
+    margin-left: -225px;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1.2em;
+    background: #FFFFFF;
+    border: 1px solid #2b2e33;
+    color: #2b2e33;
+}
+/* Tooltip */
+.tooltip-inner {
+    white-space: pre-wrap;
+    max-width: 350px;
+}
+
+.operator-container{
+    margin-top: 15px;
+}
+
