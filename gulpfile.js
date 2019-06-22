@@ -4,6 +4,7 @@ const cleanCSS = require('gulp-clean-css');
 const concat = require('gulp-concat');
 const rename = require('gulp-rename');
 const prefix = require('gulp-autoprefixer');
+const gulpif = require('gulp-if');
 
 var config = require('./gulpfile.config.json');
 
@@ -13,28 +14,33 @@ function minifyCSS() {
         // Prefix for cross browser
         .pipe(prefix('last 2 versions'))
         //Concat all files
-        .pipe(concat(config.css.concat))
+        .pipe(gulpif(config.css.concat !== false, concat(config.css.concat+'.css')))
         // Output
         .pipe(dest(config.css.dest))
         // Minify the file
         .pipe(cleanCSS())
         // Rename the file
-        .pipe(rename(config.css.minify))
+        .pipe(rename(function (path) {
+            path.extname = ".min.css";
+        }))
         // Output
         .pipe(dest(config.css.dest))
 }
 
 // Gulp task to minify and union JavaScript files
 function minifyJS() {
+    console.log(config.js.concat != false);
     return src(config.js.src)
         //Concat all files
-        .pipe(concat(config.js.concat))
+        .pipe(gulpif(config.js.concat !== false, concat(config.js.concat+'.js')))
         // Output
         .pipe(dest(config.js.dest))
         // Minify the file
         .pipe(uglify())
         // Rename the file
-        .pipe(rename(config.js.minify))
+        .pipe(rename(function (path) {
+            path.extname = ".min.js";
+        }))
         // Output
         .pipe(dest(config.js.dest))
 }
