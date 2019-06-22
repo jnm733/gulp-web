@@ -1,0 +1,14 @@
+{
+  "css": {
+    "src"  : ["public/css/*.css"],
+    "dest"   : "public/output/css",
+    "concat" : "styles.css",
+    "minify" : "styles.min.css"
+  },
+  "js": {
+    "src"    : ["public/js/*.js", "!public/js/deposit.js"],
+    "dest"   : "public/output/js",
+    "concat" : "scripts.js",
+    "minify" : "scripts.min.js"
+  }
+}
