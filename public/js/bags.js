@@ -1,15 +1,17 @@
 $(document).ready(function() {
 
     var table;
-    $('#bag-instances-table')
+    $('#bag-instances-table3')
         .on('click', '.btn-details-bag', function() {
             var bag_instance = $(this).data('id');
             var bag_instances_table = $('#instance-result-table');
             var modal = $('#modal-bag-instance-detail');
 
+
             if (table) {
                 bag_instances_table.DataTable().destroy();
             }
+
 
             bag_instances_table.attr('data-endpoint', bag_instances_table.attr('data-url') + '/' + bag_instance);
             var datatable_columns = [];

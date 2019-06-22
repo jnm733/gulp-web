@@ -5,6 +5,7 @@ const concat = require('gulp-concat');
 const rename = require('gulp-rename');
 const prefix = require('gulp-autoprefixer');
 const gulpif = require('gulp-if');
+const rev = require('gulp-rev');
 
 var config = require('./gulpfile.config.json');
 
@@ -19,17 +20,23 @@ function minifyCSS() {
         .pipe(dest(config.css.dest))
         // Minify the file
         .pipe(cleanCSS())
+        //Add version hash
+        .pipe(rev())
         // Rename the file
         .pipe(rename(function (path) {
             path.extname = ".min.css";
         }))
         // Output
         .pipe(dest(config.css.dest))
+        //Write manifest
+        .pipe(rev.manifest('build-manifest.json', {
+            merge: true
+        }))
+        .pipe(dest(config.css.dest+'/build'));
 }
 
 // Gulp task to minify and union JavaScript files
 function minifyJS() {
-    console.log(config.js.concat != false);
     return src(config.js.src)
         //Concat all files
         .pipe(gulpif(config.js.concat !== false, concat(config.js.concat+'.js')))
@@ -37,12 +44,19 @@ function minifyJS() {
         .pipe(dest(config.js.dest))
         // Minify the file
         .pipe(uglify())
+        //Add version hash
+        .pipe(rev())
         // Rename the file
         .pipe(rename(function (path) {
             path.extname = ".min.js";
         }))
         // Output
         .pipe(dest(config.js.dest))
+        //Write manifest
+        .pipe(rev.manifest('build-manifest.json', {
+            merge: true
+        }))
+        .pipe(dest(config.js.dest+'/build'));
 }
 
 exports.build = parallel(minifyCSS, minifyJS);
